@@ -41,11 +41,11 @@ function fetchPage(url, callback) {
 
 function run(db) {
 	// Use request to read in pages.
-	fetchPage("https://morph.io", function (body) {
+	fetchPage("https://www.autoscout24.nl/resultaten?pricefrom=0&cy=NL&powertype=kw&atype=C&ustate=N%2CU&ipc=home%3Asearchbox&ipl=button&sort=age&desc=1", function (body) {
 		// Use cheerio to find things in the page with css selectors.
 		var $ = cheerio.load(body);
 
-		var elements = $("div.media-body span.p-name").each(function () {
+		var elements = $("div.cldt-summary-vehicle-data ul li").each(function () {
 			var value = $(this).text().trim();
 			updateRow(db, value);
 		});
